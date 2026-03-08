@@ -1,0 +1,23 @@
+[project]
+name = "time-2-study"
+version = "1.0.0"
+description = "Simple timer to track your learning time."
+readme = "README.md"
+requires-python = ">=3.14"
+license = {file = "LICENSE"}
+authors = [
+    {name = "mknnnnnnn"}
+]
+
+[project.scripts]
+t2s = "time_2_study.__main__:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
