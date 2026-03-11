@@ -16,7 +16,11 @@ t2s --off --notes "I learned pointers in C"
 ```
 Show your last recorded learning time:
 ```bash
-t2s --show
+t2s --last
+```
+Show your first recorded learning time:
+```bash
+t2s --first
 ```
 Delete the stored learning time:
 ```bash

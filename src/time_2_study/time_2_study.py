@@ -10,12 +10,19 @@ def delete(path: Path) -> None:
         return
     path.unlink()
 
-def show(path: Path) -> None:
+def last(path: Path) -> None:
     if not path.exists():
         return 
     with open(path, "r") as file:
         data = json.load(file)
     print(data[-1])
+
+def first(path: Path) -> Nonoe:
+    if not path.exists():
+        return
+    with open(path, "r") as file:
+        data = json.load(file)
+    print(data[0])
 
 def list_(path: Path) -> tuple:
     if path.exists():
@@ -75,7 +82,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--on", action="store_true", help="Turn the program on")
     parser.add_argument("--off", action="store_true", help="Turn the program off")
-    parser.add_argument("-s","--show", action="store_true", help="Show the last record")
+    parser.add_argument("-l","--last", action="store_true", help="Show the last record")
+    parser.add_argument("-f", "--first", action="store_true", help="Show the first record")
     parser.add_argument("-d","--delete", action="store_true", help="Delete all records")
     parser.add_argument("-n", "--notes", type=str, help="Notes can only be added when turning the program off")
     args = parser.parse_args()
@@ -84,7 +92,9 @@ def main():
         on(PATH)
     if args.off:
         off(PATH, args.notes)
-    if args.show:
-        show(PATH)
+    if args.last:
+        last(PATH)
+    if args.first:
+        first(PATH)
     if args.delete:
         delete(PATH)
