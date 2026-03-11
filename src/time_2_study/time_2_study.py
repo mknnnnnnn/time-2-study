@@ -17,7 +17,7 @@ def last(path: Path) -> None:
         data = json.load(file)
     print(data[-1])
 
-def first(path: Path) -> Nonoe:
+def first(path: Path) -> None:
     if not path.exists():
         return
     with open(path, "r") as file:
