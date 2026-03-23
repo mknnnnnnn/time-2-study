@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import json
+import re
 from pathlib import Path
 
 PATH = Path(__file__).resolve().parent / "stats.json"
@@ -35,6 +36,28 @@ def list_(path: Path) -> tuple:
         day = 1
         total_time = "00:00:00"
         return day, total_time
+    
+def parse_time(time: str) -> tuple:
+    pattern = re.compile(
+        r"^(?:(?P<day>\d+)\s+days?,\s*)?"
+        r"(?P<hours>\d+):"
+        r"(?P<minutes>\d+):"
+        r"(?P<seconds>\d+)$"
+    )
+
+    m = pattern.match(time)
+    data = m.groupdict()
+
+    day = int(data["day"] or 0)
+    hours = int(data["hours"])
+    minutes = int(data["minutes"])
+    seconds = int(data["seconds"])
+    
+    return day, hours, minutes, seconds
+
+def to_hour_format(time: str):
+    day, hour, minutes, seconds = parse_time(time)
+    return f"{day * 24 + hour}:{minutes}:{seconds}"
 
 def on(path: Path) -> None:
     
@@ -67,12 +90,15 @@ def off(path: Path, notes: str) -> None:
     date_str = data[-1]["Date"]
     time_ = datetime.datetime.now() - datetime.datetime.fromisoformat(date_str)
     total_time_str = data[-1]["Total Time"]
-    h, m, s = map(int, total_time_str.split(":"))
-    total_time = datetime.timedelta(hours=h, minutes=m, seconds=s) + time_
+
+    d, h, m, s = parse_time(total_time_str)
+    
+    total_time = datetime.timedelta(days=d, hours=h, minutes=m, seconds=s) + time_
+
+    total_time_str = str(total_time).split(".")[0]
 
     data[-1]["Time"] = str(time_).split(".")[0]
-    data[-1]["Total Time"] = str(total_time).split(".")[0]
-    
+    data[-1]["Total Time"] = to_hour_format(total_time_str)
     data[-1]["Notes"] = notes if notes else ""
 
     with open(path, "w") as file:
