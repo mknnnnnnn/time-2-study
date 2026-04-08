@@ -2,31 +2,42 @@
 A simple timer to track your learning time.
 
 ## Features
-Start tracking your learning time:
+Turn tracking on:
 ```bash
 t2s --on
 ```
-Stop the timer when you finish:
+Turn tracking off:
 ```bash
 t2s --off
 ```
-Stop the timer and save notes about what you learned:
+Stop the timer:
+```bash
+t2s --stop
+```
+Start the timer:
+```bash
+t2s --start
+```
+Turn off the timer and save notes about what you learned:
 ```bash
 t2s --off --notes "I learned pointers in C"
 ```
-Show your last recorded learning time:
+Show your last recorded learning data:
 ```bash
 t2s --last
 ```
-Show your first recorded learning time:
+Show your first recorded learning data:
 ```bash
 t2s --first
 ```
-Delete the stored learning time:
+Delete the stored learning data:
 ```bash
-t2s --delete
+t2s --delete-all
 ```
-
+Delete the last stored learning data:
+```bash
+t2s --delete-last
+```
 Show help and available shortcuts:
 ```bash
 t2s --help
