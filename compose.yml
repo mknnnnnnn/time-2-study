@@ -1,0 +1,7 @@
+services:
+  t2s: 
+    build: .
+    container_name: t2s
+    volumes:
+      - ./stats:/app/stats
+    
