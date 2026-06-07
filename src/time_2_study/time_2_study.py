@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 # STATS_PATH = Path(__file__).resolve().parent / "stats.json"
-STATS_PATH = Path("stats.json")
+STATS_PATH = Path("stats/stats.json")
 
 def list_(path: Path) -> tuple:
     if path.exists():
