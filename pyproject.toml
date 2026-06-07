@@ -3,7 +3,7 @@ name = "time-2-study"
 version = "1.0.0"
 description = "Simple timer to track your learning time."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 license = {file = "LICENSE"}
 authors = [
     {name = "mknnnnnnn"}
